@@ -1,0 +1,43 @@
+﻿@model WebTracNghiem.Models.ExamViewModel
+
+@{
+    ViewBag.Title = "Làm bài trắc nghiệm";
+}
+
+<h2>Làm bài trắc nghiệm</h2>
+
+@using (Html.BeginForm("Submit", "Exam", FormMethod.Post))
+{
+    for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        var question = Model.Questions[i];
+        <div class="question">
+            <h4>@(i + 1). @question.Content</h4>
+            @Html.Hidden($"Questions[{i}].Id", question.Id)
+            @Html.Hidden($"Questions[{i}].Content", question.Content)
+            @Html.Hidden($"Questions[{i}].OptionA", question.OptionA)
+            @Html.Hidden($"Questions[{i}].OptionB", question.OptionB)
+            @Html.Hidden($"Questions[{i}].OptionC", question.OptionC)
+            @Html.Hidden($"Questions[{i}].OptionD", question.OptionD)
+            @Html.Hidden($"Questions[{i}].CorrectAnswer", question.CorrectAnswer)
+
+            <div>
+                <label>
+                    <input type="radio" name="UserAnswers[@question.Id]" value="A" /> A. @question.OptionA
+                </label><br />
+                <label>
+                    <input type="radio" name="UserAnswers[@question.Id]" value="B" /> B. @question.OptionB
+                </label><br />
+                <label>
+                    <input type="radio" name="UserAnswers[@question.Id]" value="C" /> C. @question.OptionC
+                </label><br />
+                <label>
+                    <input type="radio" name="UserAnswers[@question.Id]" value="D" /> D. @question.OptionD
+                </label>
+            </div>
+        </div>
+        <hr />
+    }
+
+    <button type="submit" class="btn btn-primary">Nộp bài</button>
+}

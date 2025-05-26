@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebTracNghiem.Models.Question>
+
+<h2>Danh sách câu hỏi</h2>
+
+<a href="/Exam/Create">Thêm câu hỏi mới</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nội dung</th>
+            <th>Đáp án đúng</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@q.Id</td>
+                <td>@q.Content</td>
+                <td>@q.CorrectAnswer</td>
+                <td>
+                    <a href="/Exam/Edit/@q.Id">Sửa</a> |
+                    <a href="/Exam/Delete/@q.Id">Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
